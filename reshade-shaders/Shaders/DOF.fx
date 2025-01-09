@@ -967,7 +967,7 @@ void PS_McFlyDOF3(float4 vpos : SV_Position, float2 texcoord : TEXCOORD, out flo
 		for (float y = -2; y <= 2; y++)
 		{
 			float2 offset = float2(x, y);
-			float offsetweight = weights[abs(x)] * weights[abs(y)];
+			float offsetweight = weights[int(abs(x))] * weights[int(abs(y))]; //cast abs(x) and abs(y) to integers before using as indices
 			blurcolor.xyz += tex2Dlod(ReShade::BackBuffer, float4(texcoord + offset.xy * blurmult, 0, 0)).xyz * offsetweight;
 			blurcolor.w += offsetweight;
 		}
